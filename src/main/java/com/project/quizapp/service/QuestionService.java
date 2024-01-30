@@ -1,5 +1,6 @@
 package com.project.quizapp.service;
 
+import com.project.quizapp.entity.Question;
 import com.project.quizapp.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,5 +14,9 @@ public class QuestionService {
 
     public List getAllQuestions() {
         return questionRepository.findAll();
+    }
+
+    public void addQuestion(Question question) {
+        questionRepository.save(question);
     }
 }

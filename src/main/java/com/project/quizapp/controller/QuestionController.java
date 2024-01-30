@@ -1,10 +1,9 @@
 package com.project.quizapp.controller;
 
+import com.project.quizapp.entity.Question;
 import com.project.quizapp.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +18,11 @@ public class QuestionController {
     public String getAllQuestion() {
         List allQuestions = questionService.getAllQuestions();
         return allQuestions.toString();
+    }
+
+    @PostMapping("/addQuestion")
+    public String addQuestion(@RequestBody Question question) {
+        questionService.addQuestion(question);
+        return "Question Added!";
     }
 }
