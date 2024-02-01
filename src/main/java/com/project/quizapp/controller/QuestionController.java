@@ -4,6 +4,7 @@ import com.project.quizapp.entity.Question;
 import com.project.quizapp.service.QuestionService;
 import com.project.quizapp.utils.Category;
 import com.project.quizapp.utils.Level;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,10 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/questions")
+@RequiredArgsConstructor
 public class QuestionController {
 
-    @Autowired
-    private QuestionService questionService;
+    private final QuestionService questionService;
 
     @GetMapping("/allQuestions")
     public String getAllQuestion() {
