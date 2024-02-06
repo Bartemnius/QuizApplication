@@ -19,8 +19,8 @@ public class QuestionService {
         return questionRepository.findAll();
     }
 
-    public void addQuestion(Question question) {
-        questionRepository.save(question);
+    public Question addQuestion(Question question) {
+        return questionRepository.save(question);
     }
 
     public List getQuestionsByLevel(Level questionLevel) {
