@@ -1,6 +1,5 @@
 package com.project.quizapp.entity;
 
-
 import com.project.quizapp.utils.Category;
 import com.project.quizapp.utils.Level;
 import jakarta.persistence.*;
