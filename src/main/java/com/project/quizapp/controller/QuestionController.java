@@ -1,40 +1,19 @@
 package com.project.quizapp.controller;
 
-import com.project.quizapp.entity.Question;
-import com.project.quizapp.service.QuestionService;
-import com.project.quizapp.utils.Category;
-import com.project.quizapp.utils.Level;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import com.project.quizapp.utils.ViewNames;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-
-@RestController
-@RequestMapping("/questions")
-@RequiredArgsConstructor
+@Controller
 public class QuestionController {
-
-    private final QuestionService questionService;
-
-    @GetMapping("/allQuestions")
-    public ResponseEntity<List<Question>> getAllQuestion() {
-        return questionService.getAllQuestions();
+    @GetMapping("/")
+    public ModelAndView helloPage() {
+        return new ModelAndView(ViewNames.MAIN_VIEW);
     }
 
-    @PostMapping("/addQuestion")
-    public String addQuestion(@RequestBody Question question) {
-        questionService.addQuestion(question);
-        return "Question Added!";
-    }
-
-    @GetMapping("/level/{questionLevel}")
-    public ResponseEntity<List<Question>> getQuestionsByLevel(@PathVariable Level questionLevel) {
-        return questionService.getQuestionsByLevel(questionLevel);
-    }
-
-    @GetMapping("/category/{category}")
-    public ResponseEntity<List<Question>> getQuestionsByLevel(@PathVariable Category category) {
-        return questionService.getQuestionsByCategory(category);
+    @GetMapping("/randomQuestion")
+    public ModelAndView randomQuestion() {
+        return new ModelAndView(ViewNames.QUESTION_VIEW);
     }
 }
