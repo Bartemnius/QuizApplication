@@ -15,7 +15,7 @@ import java.util.List;
 public class QuestionService {
     private final QuestionRepository questionRepository;
 
-    public List getAllQuestions() {
+    public List<Question> getAllQuestions() {
         return questionRepository.findAll();
     }
 
@@ -23,11 +23,11 @@ public class QuestionService {
         return questionRepository.save(question);
     }
 
-    public List getQuestionsByLevel(Level questionLevel) {
+    public List<Question> getQuestionsByLevel(Level questionLevel) {
         return questionRepository.getQuestionsByLevel(questionLevel);
     }
 
-    public List getQuestionsByCategory(Category category) {
+    public List<Question> getQuestionsByCategory(Category category) {
         return questionRepository.getQuestionsByCategory(category);
     }
 }

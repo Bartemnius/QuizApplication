@@ -19,7 +19,7 @@ public class QuestionController {
 
     @GetMapping("/allQuestions")
     public String getAllQuestion() {
-        List allQuestions = questionService.getAllQuestions();
+        List<Question> allQuestions = questionService.getAllQuestions();
         return allQuestions.toString();
     }
 
@@ -31,13 +31,13 @@ public class QuestionController {
 
     @GetMapping("/level/{questionLevel}")
     public String getQuestionsByLevel(@PathVariable Level questionLevel) {
-        List questionsByLevel = questionService.getQuestionsByLevel(questionLevel);
+        List<Question> questionsByLevel = questionService.getQuestionsByLevel(questionLevel);
         return questionsByLevel.toString();
     }
 
     @GetMapping("/category/{category}")
     public String getQuestionsByLevel(@PathVariable Category category) {
-        List questionsByCategory = questionService.getQuestionsByCategory(category);
+        List<Question> questionsByCategory = questionService.getQuestionsByCategory(category);
         return questionsByCategory.toString();
     }
 }
