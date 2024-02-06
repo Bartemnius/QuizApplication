@@ -9,6 +9,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +33,9 @@ class QuestionServiceTest {
         Question question = new Question("question", "a", "b", "c", "d", "a", Level.EASY, Category.JAVA);
         when(questionRepository.save(any())).then(returnsFirstArg());
 
-        Question questionAdded = questionService.addQuestion(question);
-        assertThat(question).isEqualTo(questionAdded);
+        ResponseEntity<Question> questionResponseEntity = questionService.addQuestion(question);
+        assertThat(questionResponseEntity.getBody()).isEqualTo(question);
+        assertThat(questionResponseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
 
     @Test
@@ -46,8 +49,10 @@ class QuestionServiceTest {
         questionList.add(question3);
         when(questionRepository.findAll()).thenReturn(questionList);
 
-        List allQuestions = questionService.getAllQuestions();
-        assertThat(allQuestions).isEqualTo(questionList);
+        ResponseEntity<List<Question>> allQuestions = questionService.getAllQuestions();
+        assertThat(allQuestions.getBody()).isEqualTo(questionList);
+        assertThat(allQuestions.getStatusCode()).isEqualTo(HttpStatus.OK);
+
     }
 
     @Test
@@ -59,8 +64,9 @@ class QuestionServiceTest {
         easyQuestionList.add(question3);
         when(questionRepository.getQuestionsByLevel(Level.EASY)).thenReturn(easyQuestionList);
 
-        List questionsByLevel = questionService.getQuestionsByLevel(Level.EASY);
-        assertThat(questionsByLevel).isEqualTo(easyQuestionList);
+        ResponseEntity<List<Question>> questionsByLevel = questionService.getQuestionsByLevel(Level.EASY);
+        assertThat(questionsByLevel.getBody()).isEqualTo(easyQuestionList);
+        assertThat(questionsByLevel.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
     @Test
@@ -72,8 +78,9 @@ class QuestionServiceTest {
         javaQuestionList.add(question3);
         when(questionRepository.getQuestionsByCategory(Category.JAVA)).thenReturn(javaQuestionList);
 
-        List questionsByLevel = questionService.getQuestionsByCategory(Category.JAVA);
-        assertThat(questionsByLevel).isEqualTo(javaQuestionList);
+        ResponseEntity<List<Question>> questionsByCategory = questionService.getQuestionsByCategory(Category.JAVA);
+        assertThat(questionsByCategory.getBody()).isEqualTo(javaQuestionList);
+        assertThat(questionsByCategory.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
 }

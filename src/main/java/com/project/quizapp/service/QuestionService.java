@@ -6,8 +6,12 @@ import com.project.quizapp.utils.Category;
 import com.project.quizapp.utils.Level;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,19 +19,40 @@ import java.util.List;
 public class QuestionService {
     private final QuestionRepository questionRepository;
 
-    public List<Question> getAllQuestions() {
-        return questionRepository.findAll();
+    public ResponseEntity<List<Question>> getAllQuestions() {
+        try {
+            return new ResponseEntity<>(questionRepository.findAll(), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
+
     }
 
-    public Question addQuestion(Question question) {
-        return questionRepository.save(question);
+    public ResponseEntity<Question> addQuestion(Question question) {
+        try {
+            return new ResponseEntity<>(questionRepository.save(question), HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
-    public List<Question> getQuestionsByLevel(Level questionLevel) {
-        return questionRepository.getQuestionsByLevel(questionLevel);
+    public ResponseEntity<List<Question>> getQuestionsByLevel(Level questionLevel) {
+        try {
+            return new ResponseEntity<>(questionRepository.getQuestionsByLevel(questionLevel), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NOT_FOUND);
     }
 
-    public List<Question> getQuestionsByCategory(Category category) {
-        return questionRepository.getQuestionsByCategory(category);
+    public ResponseEntity<List<Question>> getQuestionsByCategory(Category category) {
+        try {
+            return new ResponseEntity<>(questionRepository.getQuestionsByCategory(category), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NOT_FOUND);
     }
 }
