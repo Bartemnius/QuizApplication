@@ -53,4 +53,13 @@ public class QuestionService {
         }
         return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NOT_FOUND);
     }
+
+    public ResponseEntity<Question> getRandomQuestion() {
+        try {
+            return new ResponseEntity<>(questionRepository.getRandomQuestion(), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new Question(), HttpStatus.BAD_REQUEST);
+    }
 }

@@ -37,4 +37,9 @@ public class RestQuestionController {
     public ResponseEntity<List<Question>> getQuestionsByLevel(@PathVariable Category category) {
         return questionService.getQuestionsByCategory(category);
     }
+
+    @GetMapping("/randomQuestion")
+    public ResponseEntity<Question> getRandomQuestion() {
+        return questionService.getRandomQuestion();
+    }
 }
