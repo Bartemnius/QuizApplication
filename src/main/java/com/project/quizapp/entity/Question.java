@@ -38,4 +38,9 @@ public class Question {
         this.level = level;
         this.category = category;
     }
+
+    public boolean isAnswerCorrect(String ans) {
+        if(ans.equals(goodAnswer)) return true;
+        return false;
+    }
 }

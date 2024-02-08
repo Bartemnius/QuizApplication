@@ -60,6 +60,15 @@ public class QuestionService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<>(new Question(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    }
+
+    public ResponseEntity<Question> getQuestionById(Long id) {
+        try {
+            return new ResponseEntity<>(questionRepository.getReferenceById(id), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 }
