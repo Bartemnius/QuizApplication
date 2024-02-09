@@ -4,12 +4,12 @@ import com.project.quizapp.entity.Question;
 import com.project.quizapp.service.QuestionService;
 import com.project.quizapp.utils.ViewNames;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class QuestionController {
@@ -24,19 +24,28 @@ public class QuestionController {
     @GetMapping("/randomQuestion")
     public ModelAndView randomQuestion() {
         ModelAndView modelAndView = new ModelAndView(ViewNames.QUESTION_VIEW);
-        Question randomQuestion = questionService.getRandomQuestion().getBody();
-        modelAndView.addObject("randomQuestion", randomQuestion);
+        Question question = questionService.getRandomQuestion().getBody();
+        modelAndView.addObject("question", question);
+        return modelAndView;
+    }
+
+    @GetMapping("/question")
+    public ModelAndView question(@RequestParam Long questionId) {
+        ModelAndView modelAndView = new ModelAndView(ViewNames.QUESTION_VIEW);
+        Question question = questionService.getQuestionById(questionId).getBody();
+        modelAndView.addObject("question", question);
         return modelAndView;
     }
 
     @PostMapping("/answer")
-    public String answer(@RequestParam Long questionId, @RequestParam String ans) {
+    public RedirectView answer(@RequestParam Long questionId, @RequestParam String ans) {
         Question question = questionService.getQuestionById(questionId).getBody();
-        if(question.isAnswerCorrect(ans)) {
+        if (question.isAnswerCorrect(ans)) {
             System.out.println("Correct!");
-        } else {
-            System.out.println("Not this time :(");
+            return new RedirectView("/randomQuestion");
         }
-        return "redirect:/randomQuestion";
+
+        System.out.println("Not this time :(");
+        return new RedirectView("/question?questionId=" + questionId);
     }
 }

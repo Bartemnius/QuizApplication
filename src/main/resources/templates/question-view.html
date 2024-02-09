@@ -16,7 +16,7 @@
             <h5 class="card-title">Question</h5>
         </div>
         <div class="card-body">
-            <p th:text="${randomQuestion.question}">Here will be some question...</p>
+            <p th:text="${question.question}">Here will be some question...</p>
         </div>
     </div>
 
@@ -26,9 +26,9 @@
             <div class="card">
                 <div class="card-body">
                     <form  th:action="@{/answer}" th:object="${ans}" method="post">
-                        <input type="hidden" th:name="questionId" th:value="${randomQuestion.id}">
-                        <input type="hidden" th:name="ans" th:value="${randomQuestion.ansA}">
-                        <button type="submit" class="btn btn-link" th:text="${randomQuestion.ansA}">Answer A</button>
+                        <input type="hidden" th:name="questionId" th:value="${question.id}">
+                        <input type="hidden" th:name="ans" th:value="${question.ansA}">
+                        <button type="submit" class="btn btn-link" th:text="${question.ansA}">Answer A</button>
                     </form>
                 </div>
             </div>
@@ -37,9 +37,9 @@
             <div class="card">
                 <div class="card-body">
                     <form  th:action="@{/answer}" th:object="${ans}" method="post">
-                        <input type="hidden" th:name="questionId" th:value="${randomQuestion.id}">
-                        <input type="hidden" th:name="ans" th:value="${randomQuestion.ansB}">
-                        <button type="submit" class="btn btn-link" th:text="${randomQuestion.ansB}">Answer B</button>
+                        <input type="hidden" th:name="questionId" th:value="${question.id}">
+                        <input type="hidden" th:name="ans" th:value="${question.ansB}">
+                        <button type="submit" class="btn btn-link" th:text="${question.ansB}">Answer B</button>
                     </form>
                 </div>
             </div>
@@ -47,9 +47,9 @@
         <div class="col-md-3">
             <div class="card">
                 <div class="card-body">
-                    <input type="hidden" th:name="questionId" th:value="${randomQuestion.id}">
-                    <input type="hidden" th:name="ans" th:value="${randomQuestion.ansC}">
-                    <button type="submit" class="btn btn-link" th:text="${randomQuestion.ansC}">Answer C</button>
+                    <input type="hidden" th:name="questionId" th:value="${question.id}">
+                    <input type="hidden" th:name="ans" th:value="${question.ansC}">
+                    <button type="submit" class="btn btn-link" th:text="${question.ansC}">Answer C</button>
                 </form>
                 </div>
             </div>
@@ -58,9 +58,9 @@
             <div class="card">
                 <div class="card-body">
                     <form  th:action="@{/answer}" th:object="${ans}" method="post">
-                        <input type="hidden" th:name="questionId" th:value="${randomQuestion.id}">
-                        <input type="hidden" th:name="ans" th:value="${randomQuestion.ansD}">
-                        <button type="submit" class="btn btn-link" th:text="${randomQuestion.ansD}">Answer D</button>
+                        <input type="hidden" th:name="questionId" th:value="${question.id}">
+                        <input type="hidden" th:name="ans" th:value="${question.ansD}">
+                        <button type="submit" class="btn btn-link" th:text="${question.ansD}">Answer D</button>
                     </form>
                 </div>
             </div>
