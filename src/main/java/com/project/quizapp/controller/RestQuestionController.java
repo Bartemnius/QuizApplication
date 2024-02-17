@@ -4,6 +4,7 @@ import com.project.quizapp.entity.Question;
 import com.project.quizapp.service.QuestionService;
 import com.project.quizapp.utils.Category;
 import com.project.quizapp.utils.Level;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,15 +18,17 @@ public class RestQuestionController {
 
     private final QuestionService questionService;
 
+    // TODO: maybe if there is like 1000000 question in DB there should be paging
+    //  but is to be done much later
     @GetMapping("/allQuestions")
     public ResponseEntity<List<Question>> getAllQuestion() {
         return questionService.getAllQuestions();
     }
 
     @PostMapping("/addQuestion")
-    public String addQuestion(@RequestBody Question question) {
+    public ResponseEntity<String> addQuestion(@Valid @RequestBody Question question) {
         questionService.addQuestion(question);
-        return "Question Added!";
+        return ResponseEntity.ok("Question Added!");
     }
 
     @GetMapping("/level/{questionLevel}")

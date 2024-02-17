@@ -17,6 +17,13 @@ import java.util.List;
 public class QuestionService {
     private final QuestionRepository questionRepository;
 
+
+    // TODO :
+    //  This class needs to be changed.
+    //  There is no need for service to return ResponseEntity at all
+    //  This only should apply to Controller classes as here single responsibility rule is broken
+
+
     public ResponseEntity<List<Question>> getAllQuestions() {
         try {
             return new ResponseEntity<>(questionRepository.findAll(), HttpStatus.OK);

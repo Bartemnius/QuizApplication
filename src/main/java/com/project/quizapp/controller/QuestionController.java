@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class QuestionController {
 
     private final QuestionService questionService;
-    private ModelAndView questionView = new ModelAndView(ViewNames.QUESTION_VIEW);
+    private final ModelAndView questionView = new ModelAndView(ViewNames.QUESTION_VIEW);
 
 
     @GetMapping("/")
@@ -42,6 +42,11 @@ public class QuestionController {
     @PostMapping("/answer")
     public String answer(@RequestParam Long questionId, @RequestParam String ans, RedirectAttributes redirectAttributes) {
         Question question = questionService.getQuestionById(questionId).getBody();
+
+        // TODO :
+        //  Here tha print out should be deleted and some logging maybe should be added
+
+
         if (question.isAnswerCorrect(ans)) {
             System.out.println("Correct!");
             redirectAttributes.addFlashAttribute("result", "success");
