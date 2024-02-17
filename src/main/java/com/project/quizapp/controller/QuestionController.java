@@ -3,7 +3,7 @@ package com.project.quizapp.controller;
 import com.project.quizapp.entity.Question;
 import com.project.quizapp.service.QuestionService;
 import com.project.quizapp.utils.ViewNames;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,9 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@RequiredArgsConstructor
 public class QuestionController {
-    @Autowired
-    QuestionService questionService;
+
+    private final QuestionService questionService;
     private ModelAndView questionView = new ModelAndView(ViewNames.QUESTION_VIEW);
 
 

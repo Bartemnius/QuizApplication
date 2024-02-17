@@ -40,7 +40,6 @@ public class Question {
     }
 
     public boolean isAnswerCorrect(String ans) {
-        if(ans.equals(goodAnswer)) return true;
-        return false;
+        return ans.equals(goodAnswer);
     }
 }
