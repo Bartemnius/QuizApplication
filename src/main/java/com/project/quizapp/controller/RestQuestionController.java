@@ -1,5 +1,6 @@
 package com.project.quizapp.controller;
 
+import com.project.quizapp.dto.QuestionDto;
 import com.project.quizapp.entity.Question;
 import com.project.quizapp.service.QuestionService;
 import com.project.quizapp.utils.Category;
@@ -21,28 +22,28 @@ public class RestQuestionController {
     // TODO: maybe if there is like 1000000 question in DB there should be paging
     //  but is to be done much later
     @GetMapping("/allQuestions")
-    public ResponseEntity<List<Question>> getAllQuestion() {
+    public ResponseEntity<List<QuestionDto>> getAllQuestion() {
         return questionService.getAllQuestions();
     }
 
     @PostMapping("/addQuestion")
-    public ResponseEntity<String> addQuestion(@Valid @RequestBody Question question) {
-        questionService.addQuestion(question);
+    public ResponseEntity<String> addQuestion(@Valid @RequestBody QuestionDto questionDto) {
+        questionService.addQuestion(questionDto);
         return ResponseEntity.ok("Question Added!");
     }
 
     @GetMapping("/level/{questionLevel}")
-    public ResponseEntity<List<Question>> getQuestionsByLevel(@PathVariable Level questionLevel) {
+    public ResponseEntity<List<QuestionDto>> getQuestionsByLevel(@PathVariable Level questionLevel) {
         return questionService.getQuestionsByLevel(questionLevel);
     }
 
     @GetMapping("/category/{category}")
-    public ResponseEntity<List<Question>> getQuestionsByLevel(@PathVariable Category category) {
+    public ResponseEntity<List<QuestionDto>> getQuestionsByLevel(@PathVariable Category category) {
         return questionService.getQuestionsByCategory(category);
     }
 
     @GetMapping("/randomQuestion")
-    public ResponseEntity<Question> getRandomQuestion() {
+    public ResponseEntity<QuestionDto> getRandomQuestion() {
         return questionService.getRandomQuestion();
     }
 }

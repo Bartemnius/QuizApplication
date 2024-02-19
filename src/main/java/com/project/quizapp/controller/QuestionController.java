@@ -1,6 +1,8 @@
 package com.project.quizapp.controller;
 
+import com.project.quizapp.dto.QuestionDto;
 import com.project.quizapp.entity.Question;
+import com.project.quizapp.mapper.QuestionMapper;
 import com.project.quizapp.service.QuestionService;
 import com.project.quizapp.utils.ViewNames;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ public class QuestionController {
 
     private final QuestionService questionService;
     private final ModelAndView questionView = new ModelAndView(ViewNames.QUESTION_VIEW);
+    private final QuestionMapper questionMapper = QuestionMapper.getInstance();
 
 
     @GetMapping("/")
@@ -27,27 +30,26 @@ public class QuestionController {
 
     @GetMapping("/randomQuestion")
     public ModelAndView randomQuestion() {
-        Question question = questionService.getRandomQuestion().getBody();
-        questionView.addObject("question", question);
+        QuestionDto questionDto = questionService.getRandomQuestion().getBody();
+        questionView.addObject("question", questionDto);
         return questionView;
     }
 
     @GetMapping("/question/{questionId}")
     public ModelAndView question(@PathVariable Long questionId) {
-        Question question = questionService.getQuestionById(questionId).getBody();
-        questionView.addObject("question", question);
+        QuestionDto questionDto = questionService.getQuestionById(questionId).getBody();
+        questionView.addObject("question", questionDto);
         return questionView;
     }
 
     @PostMapping("/answer")
     public String answer(@RequestParam Long questionId, @RequestParam String ans, RedirectAttributes redirectAttributes) {
-        Question question = questionService.getQuestionById(questionId).getBody();
+        QuestionDto questionDto = questionService.getQuestionById(questionId).getBody();
 
         // TODO :
         //  Here tha print out should be deleted and some logging maybe should be added
 
-
-        if (question.isAnswerCorrect(ans)) {
+        if (questionMapper.toEntity(questionDto).isAnswerCorrect(ans)) {
             System.out.println("Correct!");
             redirectAttributes.addFlashAttribute("result", "success");
             redirectAttributes.addFlashAttribute("message", "Well done! :)");
