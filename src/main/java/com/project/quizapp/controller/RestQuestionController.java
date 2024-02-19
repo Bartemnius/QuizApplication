@@ -1,12 +1,12 @@
 package com.project.quizapp.controller;
 
 import com.project.quizapp.dto.QuestionDto;
-import com.project.quizapp.entity.Question;
 import com.project.quizapp.service.QuestionService;
 import com.project.quizapp.utils.Category;
 import com.project.quizapp.utils.Level;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,27 +23,27 @@ public class RestQuestionController {
     //  but is to be done much later
     @GetMapping("/allQuestions")
     public ResponseEntity<List<QuestionDto>> getAllQuestion() {
-        return questionService.getAllQuestions();
+        return new ResponseEntity<>(questionService.getAllQuestions(), HttpStatus.OK);
     }
 
     @PostMapping("/addQuestion")
-    public ResponseEntity<String> addQuestion(@Valid @RequestBody QuestionDto questionDto) {
-        questionService.addQuestion(questionDto);
-        return ResponseEntity.ok("Question Added!");
+    public ResponseEntity<Long> addQuestion(@Valid @RequestBody QuestionDto questionDto) {
+        return new ResponseEntity<>(questionService.addQuestion(questionDto), HttpStatus.CREATED);
+
     }
 
     @GetMapping("/level/{questionLevel}")
     public ResponseEntity<List<QuestionDto>> getQuestionsByLevel(@PathVariable Level questionLevel) {
-        return questionService.getQuestionsByLevel(questionLevel);
+        return new ResponseEntity<>(questionService.getQuestionsByLevel(questionLevel), HttpStatus.OK);
     }
 
     @GetMapping("/category/{category}")
     public ResponseEntity<List<QuestionDto>> getQuestionsByLevel(@PathVariable Category category) {
-        return questionService.getQuestionsByCategory(category);
+        return new ResponseEntity<>(questionService.getQuestionsByCategory(category), HttpStatus.OK);
     }
 
     @GetMapping("/randomQuestion")
     public ResponseEntity<QuestionDto> getRandomQuestion() {
-        return questionService.getRandomQuestion();
+        return new ResponseEntity<>(questionService.getRandomQuestion(), HttpStatus.OK);
     }
 }

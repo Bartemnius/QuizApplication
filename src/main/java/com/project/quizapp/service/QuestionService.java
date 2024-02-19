@@ -6,11 +6,8 @@ import com.project.quizapp.repository.QuestionRepository;
 import com.project.quizapp.utils.Category;
 import com.project.quizapp.utils.Level;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,63 +17,28 @@ public class QuestionService {
 
     private final QuestionMapper questionMapper = QuestionMapper.getInstance();
 
-    // TODO :
-    //  This class needs to be changed.
-    //  There is no need for service to return ResponseEntity at all
-    //  This only should apply to Controller classes as here single responsibility rule is broken
 
-
-    public ResponseEntity<List<QuestionDto>> getAllQuestions() {
-        try {
-            return new ResponseEntity<>(questionMapper.toListDto(questionRepository.findAll()), HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
+    public List<QuestionDto> getAllQuestions() {
+        return questionMapper.toListDto(questionRepository.findAll());
     }
 
-    public ResponseEntity<Long> addQuestion(QuestionDto questionDto) {
-        try {
-            return new ResponseEntity<>(questionRepository.save(questionMapper.toEntity(questionDto)).getId(), HttpStatus.CREATED);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    public Long addQuestion(QuestionDto questionDto) {
+        return questionRepository.save(questionMapper.toEntity(questionDto)).getId();
     }
 
-    public ResponseEntity<List<QuestionDto>> getQuestionsByLevel(Level questionLevel) {
-        try {
-            return new ResponseEntity<>(questionMapper.toListDto(questionRepository.getQuestionsByLevel(questionLevel)), HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NOT_FOUND);
+    public List<QuestionDto> getQuestionsByLevel(Level questionLevel) {
+        return questionMapper.toListDto(questionRepository.getQuestionsByLevel(questionLevel));
     }
 
-    public ResponseEntity<List<QuestionDto>> getQuestionsByCategory(Category category) {
-        try {
-            return new ResponseEntity<>(questionMapper.toListDto(questionRepository.getQuestionsByCategory(category)), HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NOT_FOUND);
+    public List<QuestionDto> getQuestionsByCategory(Category category) {
+        return questionMapper.toListDto(questionRepository.getQuestionsByCategory(category));
     }
 
-    public ResponseEntity<QuestionDto> getRandomQuestion() {
-        try {
-            return new ResponseEntity<>(questionMapper.toDto(questionRepository.getRandomQuestion()), HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    public QuestionDto getRandomQuestion() {
+        return questionMapper.toDto(questionRepository.getRandomQuestion());
     }
 
-    public ResponseEntity<QuestionDto> getQuestionById(Long id) {
-        try {
-            return new ResponseEntity<>(questionMapper.toDto(questionRepository.getReferenceById(id)), HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    public QuestionDto getQuestionById(Long id) {
+        return questionMapper.toDto(questionRepository.getReferenceById(id));
     }
 }
