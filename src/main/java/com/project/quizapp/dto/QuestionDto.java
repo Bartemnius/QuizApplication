@@ -12,8 +12,8 @@ public record QuestionDto(Long id,
                           @NotBlank(message = "Answer C can not be empty!") String ansC,
                           @NotBlank(message = "Answer D can not be empty!") String ansD,
                           @NotBlank(message = "Good answer can not be empty!") String goodAnswer,
-                          @NotBlank(message = "Level can not be empty!") Level level,
-                          @NotBlank(message = "Category can not be empty!") Category category) {
+                          @NotNull(message = "Level can not be empty!") Level level,
+                          @NotNull(message = "Category can not be empty!") Category category) {
 
     // TODO:
     //  Here maybe some validation should be done in custom validation classes or something like that

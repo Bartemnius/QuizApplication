@@ -2,17 +2,12 @@ package com.project.quizapp.entity;
 
 import com.project.quizapp.utils.Category;
 import com.project.quizapp.utils.Level;
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Value;
-import org.antlr.v4.runtime.misc.NotNull;
-
-import java.util.Locale;
 
 @Entity
 @Data
@@ -36,10 +31,10 @@ public class Question {
     private String ansD;
     @NotBlank(message = "goodAnswer can not be empty!")
     private String goodAnswer;
-    @NotBlank(message = "Level can not be empty!")
+    @NotNull(message = "Level can not be empty!")
     @Enumerated(EnumType.STRING)
     private Level level;
-    @NotBlank(message = "Category can not be empty!")
+    @NotNull(message = "Category can not be empty!")
     @Enumerated(EnumType.STRING)
     private Category category;
 
