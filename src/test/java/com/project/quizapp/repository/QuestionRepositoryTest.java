@@ -70,7 +70,6 @@ class QuestionRepositoryTest {
         questionRepository.save(question4);
     }
 
-
     @Test
     @DisplayName("When getQuestionByLevel(Easy) called return only easy questions")
     public void getEasyQuestions() {
@@ -100,6 +99,6 @@ class QuestionRepositoryTest {
     @Test
     @DisplayName("When getRandomQuestion() called return not null")
     public void getRandomQuestion() {
-       assertNotNull(questionRepository.getRandomQuestion());
+        assertNotNull(questionRepository.getRandomQuestion());
     }
 }
