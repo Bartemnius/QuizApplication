@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/questions")
 @RequiredArgsConstructor
-public class RestQuestionController {
+public class QuestionRestController {
 
     private final QuestionService questionService;
 
@@ -29,7 +29,6 @@ public class RestQuestionController {
     @PostMapping("/addQuestion")
     public ResponseEntity<Long> addQuestion(@Valid @RequestBody QuestionDto questionDto) {
         return new ResponseEntity<>(questionService.addQuestion(questionDto), HttpStatus.CREATED);
-
     }
 
     @GetMapping("/level/{questionLevel}")
