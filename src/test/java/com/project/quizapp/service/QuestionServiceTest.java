@@ -1,5 +1,6 @@
 package com.project.quizapp.service;
 
+import com.project.quizapp.dto.PostQuestionDto;
 import com.project.quizapp.dto.QuestionDto;
 import com.project.quizapp.entity.Question;
 import com.project.quizapp.mapper.QuestionMapper;
@@ -38,8 +39,7 @@ class QuestionServiceTest {
     @Test
     @DisplayName("when AddQuestion is called id is returned")
     void addQuestion() {
-        QuestionDto questionDto = new QuestionDto(
-                1l,
+        PostQuestionDto postQuestionDto = new PostQuestionDto(
                 "question",
                 "a",
                 "b",
@@ -48,9 +48,9 @@ class QuestionServiceTest {
                 "a",
                 Level.EASY,
                 Category.JAVA);
-        Question question = questionMapper.toEntity(questionDto);
+        Question question = questionMapper.toEntityFromPostDto(postQuestionDto);
         when(questionRepository.save(question)).thenReturn(question);
-        Long questionId = questionService.addQuestion(questionDto);
+        Long questionId = questionService.addQuestion(postQuestionDto);
 
         ArgumentCaptor<Question> questionArgumentCaptor = ArgumentCaptor.forClass(Question.class);
         verify(questionRepository).save(questionArgumentCaptor.capture());

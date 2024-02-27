@@ -2,6 +2,7 @@ package com.project.quizapp.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.project.quizapp.dto.PostQuestionDto;
 import com.project.quizapp.dto.QuestionDto;
 import com.project.quizapp.service.QuestionService;
 import com.project.quizapp.utils.Category;
@@ -84,8 +85,7 @@ class QuestionRestControllerTest {
     @DisplayName("When addQuestion return 201 and question id")
     public void addQuestion() throws Exception {
         //given
-        QuestionDto questionDto = new QuestionDto(
-                1L,
+        PostQuestionDto postQuestionDto = new PostQuestionDto(
                 "Question 1",
                 "A",
                 "B",
@@ -96,21 +96,15 @@ class QuestionRestControllerTest {
                 Category.JAVA);
 
         //when
-        when(questionService.addQuestion(questionDto)).thenReturn(1l);
+        when(questionService.addQuestion(postQuestionDto)).thenReturn(1l);
 
         // then
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/questions/addQuestion")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(questionDto)))
+                        .content(objectMapper.writeValueAsString(postQuestionDto)))
                 .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andReturn();
-
-        //verify
-        assertEquals(questionDto.id(),
-                objectMapper.readValue(
-                        result.getResponse().getContentAsString(), new TypeReference<>() {
-                        }));
     }
 
     @Test

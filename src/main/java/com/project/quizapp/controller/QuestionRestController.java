@@ -1,5 +1,6 @@
 package com.project.quizapp.controller;
 
+import com.project.quizapp.dto.PostQuestionDto;
 import com.project.quizapp.dto.QuestionDto;
 import com.project.quizapp.service.QuestionService;
 import com.project.quizapp.utils.Category;
@@ -27,8 +28,8 @@ public class QuestionRestController {
     }
 
     @PostMapping("/addQuestion")
-    public ResponseEntity<Long> addQuestion(@Valid @RequestBody QuestionDto questionDto) {
-        return new ResponseEntity<>(questionService.addQuestion(questionDto), HttpStatus.CREATED);
+    public ResponseEntity<Long> addQuestion(@Valid @RequestBody PostQuestionDto postQuestionDto) {
+        return new ResponseEntity<>(questionService.addQuestion(postQuestionDto), HttpStatus.CREATED);
     }
 
     @GetMapping("/level/{questionLevel}")

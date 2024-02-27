@@ -133,6 +133,4 @@ class QuestionMapperTest {
 
         assertThat(questions).isEqualTo(questionMapper.toListEntity(questionDtoList));
     }
-
-
 }

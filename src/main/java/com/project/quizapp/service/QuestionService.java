@@ -1,5 +1,6 @@
 package com.project.quizapp.service;
 
+import com.project.quizapp.dto.PostQuestionDto;
 import com.project.quizapp.dto.QuestionDto;
 import com.project.quizapp.mapper.QuestionMapper;
 import com.project.quizapp.repository.QuestionRepository;
@@ -22,8 +23,8 @@ public class QuestionService {
         return questionMapper.toListDto(questionRepository.findAll());
     }
 
-    public Long addQuestion(QuestionDto questionDto) {
-        return questionRepository.save(questionMapper.toEntity(questionDto)).getId();
+    public Long addQuestion(PostQuestionDto postQuestionDto) {
+        return questionRepository.save(questionMapper.toEntityFromPostDto(postQuestionDto)).getId();
     }
 
     public List<QuestionDto> getQuestionsByLevel(Level questionLevel) {
