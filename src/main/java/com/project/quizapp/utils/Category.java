@@ -4,5 +4,7 @@ public enum Category {
     JAVA,
     LINUX,
     GIT,
-    SPRING
+    SPRING,
+    VARIOUS,
+    SQL
 }
