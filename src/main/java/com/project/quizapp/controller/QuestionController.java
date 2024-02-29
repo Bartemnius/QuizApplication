@@ -50,11 +50,9 @@ public class QuestionController {
         if (questionMapper.toEntity(questionDto).isAnswerCorrect(ans)) {
             log.info("Correct!");
             redirectAttributes.addFlashAttribute("result", "success");
-            redirectAttributes.addFlashAttribute("message", "Well done! :)");
         } else {
             log.info("Not this time :(");
             redirectAttributes.addFlashAttribute("result", "failure");
-            redirectAttributes.addFlashAttribute("message", "Not this time! :(");
         }
         return "redirect:/question/" + questionId;
     }
