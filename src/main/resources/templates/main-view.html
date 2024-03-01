@@ -11,9 +11,20 @@
           rel="stylesheet">
     <style>
         img.logo {
-            width: 60%;
+            width: 40%;
             height: auto;
         }
+
+        .title {
+            font-family: 'Arial', sans-serif;
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+        }
+
+/*        .img-fluid {*/
+/*            max-height: 100px;*/
+/*        }*/
 
         body {
             background-color: lightgrey;
@@ -44,10 +55,13 @@
 
 <body>
 <div class="container mt-5" data-bs-theme="dark">
-    <!-- Logo -->
-    <div class="row mb-5 justify-content-center">
-        <div class="col-md-6 text-center">
-            <img src="quiz_api_logo-transformed.webp" alt="Logo" class="img-fluid logo">
+    <!-- Logo and title row -->
+    <div class="row mb-5 justify-content-center align-items-center">
+        <div class="col-md-3 text-center">
+            <img src="quiz_api_logo-transformed.webp" alt="Logo" class="img-fluid">
+        </div>
+        <div class="col-md-9 text-center">
+            <h2 class="title">Junior Java Developer Quiz Application</h2>
         </div>
     </div>
 
