@@ -50,7 +50,8 @@ class QuestionMapperTest {
                 "ansD",
                 "ansA",
                 Level.EASY,
-                Category.JAVA);
+                Category.JAVA,
+                "test");
         Question question = questionMapper.toEntity(questionDto);
 
         assertThat(questionDto.id()).isEqualTo(question.getId());
@@ -109,7 +110,8 @@ class QuestionMapperTest {
                 "ansD",
                 "ansA",
                 Level.EASY,
-                Category.JAVA);
+                Category.JAVA,
+                "test");
         QuestionDto questionDto2 = new QuestionDto(
                 1l,
                 "This is question 2",
@@ -119,7 +121,8 @@ class QuestionMapperTest {
                 "ansD",
                 "ansA",
                 Level.EASY,
-                Category.JAVA);
+                Category.JAVA,
+                "test");
         Question question1 = questionMapper.toEntity(questionDto1);
         Question question2 = questionMapper.toEntity(questionDto2);
 

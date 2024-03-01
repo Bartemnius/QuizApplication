@@ -31,6 +31,7 @@ class QuestionRestControllerTest {
     @Autowired
     private MockMvc mockMvc;
     private ObjectMapper objectMapper = new ObjectMapper();
+    private final String explanation = "test explanation";
 
     @Test
     @DisplayName("When getAllQuestions is called return all Questions added and status 200")
@@ -46,7 +47,8 @@ class QuestionRestControllerTest {
                 "D",
                 "A",
                 Level.EASY,
-                Category.JAVA));
+                Category.JAVA,
+                explanation));
         questionDtoList.add(new QuestionDto(
                 2L,
                 "Question 2",
@@ -56,7 +58,8 @@ class QuestionRestControllerTest {
                 "D",
                 "A",
                 Level.MEDIUM,
-                Category.GIT));
+                Category.GIT,
+                explanation));
 
         // when
         when(questionService.getAllQuestions()).thenReturn(questionDtoList);
@@ -93,7 +96,8 @@ class QuestionRestControllerTest {
                 "D",
                 "A",
                 Level.EASY,
-                Category.JAVA);
+                Category.JAVA,
+                explanation);
 
         //when
         when(questionService.addQuestion(postQuestionDto)).thenReturn(1l);
@@ -120,7 +124,8 @@ class QuestionRestControllerTest {
                 "D",
                 "A",
                 Level.EASY,
-                Category.JAVA);
+                Category.JAVA,
+                explanation);
 
         QuestionDto questionDto2 = new QuestionDto(
                 1L,
@@ -131,7 +136,8 @@ class QuestionRestControllerTest {
                 "D",
                 "A",
                 Level.EASY,
-                Category.JAVA);
+                Category.JAVA,
+                explanation);
 
         //when
         List<QuestionDto> questionDtoList = List.of(questionDto1, questionDto2);
@@ -169,7 +175,8 @@ class QuestionRestControllerTest {
                 "D",
                 "A",
                 Level.EASY,
-                Category.JAVA);
+                Category.JAVA,
+                explanation);
 
         QuestionDto questionDto2 = new QuestionDto(
                 1L,
@@ -180,7 +187,8 @@ class QuestionRestControllerTest {
                 "D",
                 "A",
                 Level.EASY,
-                Category.JAVA);
+                Category.JAVA,
+                explanation);
 
         //when
         List<QuestionDto> questionDtoList = List.of(questionDto1, questionDto2);
@@ -217,7 +225,8 @@ class QuestionRestControllerTest {
                 "D",
                 "A",
                 Level.EASY,
-                Category.JAVA);
+                Category.JAVA,
+                explanation);
 
         //when
         when(questionService.getRandomQuestion()).thenReturn(questionDto);

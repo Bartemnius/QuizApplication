@@ -1,7 +1,6 @@
 package com.project.quizapp.service;
 
 import com.project.quizapp.dto.PostQuestionDto;
-import com.project.quizapp.dto.QuestionDto;
 import com.project.quizapp.entity.Question;
 import com.project.quizapp.mapper.QuestionMapper;
 import com.project.quizapp.repository.QuestionRepository;
@@ -47,7 +46,8 @@ class QuestionServiceTest {
                 "d",
                 "a",
                 Level.EASY,
-                Category.JAVA);
+                Category.JAVA,
+                "test");
         Question question = questionMapper.toEntityFromPostDto(postQuestionDto);
         when(questionRepository.save(question)).thenReturn(question);
         Long questionId = questionService.addQuestion(postQuestionDto);

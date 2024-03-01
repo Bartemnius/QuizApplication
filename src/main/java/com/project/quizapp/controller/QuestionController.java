@@ -3,6 +3,7 @@ package com.project.quizapp.controller;
 import com.project.quizapp.dto.QuestionDto;
 import com.project.quizapp.mapper.QuestionMapper;
 import com.project.quizapp.service.QuestionService;
+import com.project.quizapp.utils.Category;
 import com.project.quizapp.utils.ViewNames;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor

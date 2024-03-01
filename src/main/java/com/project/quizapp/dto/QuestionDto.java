@@ -13,5 +13,8 @@ public record QuestionDto(Long id,
                           @NotBlank(message = "Answer D can not be empty!") String ansD,
                           @NotBlank(message = "Good answer can not be empty!") String goodAnswer,
                           @NotNull(message = "Level can not be empty!") Level level,
-                          @NotNull(message = "Category can not be empty!") Category category) {
+                          @NotNull(message = "Category can not be empty!") Category category,
+                          String explanation)
+
+{
 }

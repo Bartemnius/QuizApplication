@@ -38,6 +38,9 @@ public class Question {
     @Enumerated(EnumType.STRING)
     private Category category;
 
+    @Column(length = 2000)
+    private String explanation = "Explanation has not been provided";
+
     public Question(String question, String ansA, String ansB, String ansC, String ansD, String goodAnswer, Level level, Category category) {
         this.question = question;
         this.ansA = ansA;
