@@ -35,14 +35,17 @@ public class QuestionController {
     @GetMapping("/randomQuestion")
     public ModelAndView randomQuestion() {
         QuestionDto questionDto = questionService.getRandomQuestion();
-        questionView.addObject("question", questionDto);
+        QuestionDto modifiedQuestionDto = QuestionDto.withModifiedExplanation(questionDto);
+        questionView.addObject("question", modifiedQuestionDto);
         return questionView;
     }
 
     @GetMapping("/question/{questionId}")
     public ModelAndView question(@PathVariable Long questionId) {
         QuestionDto questionDto = questionService.getQuestionById(questionId);
-        questionView.addObject("question", questionDto);
+        //this enables the newline sign to be proper handled in view
+        QuestionDto modifiedQuestionDto = QuestionDto.withModifiedExplanation(questionDto);
+        questionView.addObject("question", modifiedQuestionDto);
         return questionView;
     }
 
@@ -59,4 +62,11 @@ public class QuestionController {
         }
         return "redirect:/question/" + questionId;
     }
+
+//    @GetMapping("/category/{category}")
+//    public ModelAndView getQuestionsByCategory(@PathVariable Category category) {
+//        List<QuestionDto> questionsByCategory = questionService.getQuestionsByCategory(category);
+//        ModelAndView mav = new ModelAndView("questionsByCategory-view");
+//        return mav;
+//    }
 }

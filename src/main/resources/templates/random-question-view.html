@@ -26,6 +26,9 @@
             transform: scale(1.03);
             transition: all 0.3s ease-in-out;
         }
+        .modal-body {
+            text-align : justify;
+        }
     </style>
 </head>
 
@@ -144,8 +147,10 @@
                     th:text="${question.question}">Explanation
                 </h5>
             </div>
-            <div class="modal-body">
-                <p th:text="${question.explanation}">Here goes the explanation text.</p>
+            <div class="modal-body" >
+                <p th:utext="${question.explanation}">Here goes the
+                    explanation text
+                    .</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-info" data-bs-dismiss="modal">Close</button>
