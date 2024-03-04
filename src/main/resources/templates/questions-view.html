@@ -31,16 +31,21 @@
             <div class="card-header">
                 <h5 class="card-title" align="center">Question</h5>
             </div>
-            <div class="card-body">
+            <div class="card-body justify-content-center">
                 <h4 th:text="${question.question}" align="center">Here will be a question...</h4>
             </div>
         </div>
         <div class="card">
-            <div class="card-header">
-                <h5 class="card-title" align="center">Explanation</h5>
-            </div>
             <div class="card-body">
-                <h4 th:text="${question.explanation}" align="center">Here will be an explanation...</h4>
+                <h4 th:text="${question.explanation}" align="center">Here will be an
+                    explanation...</h4>
+            </div>
+            <div class="card-footer">
+                <span>
+                    Category: <span th:text="${question.category}"  style="display: inline;">Here
+                    goes category</span> /
+                    Level: <span th:text="${question.level}"  style="display: inline;">Here goes level</span>
+                </span>
             </div>
         </div>
     </div>
@@ -55,7 +60,8 @@
                 <a class="page-link"
                    th:href="@{/learn/questions(page=${questionPage.number - 1}, size=${questionPage.size})}">Previous</a>
             </li>
-            <li class="page-item" th:each="i : ${#numbers.sequence(0, questionPage.totalPages - 1)}" th:classappend="${i == questionPage.number ? 'active' : ''}">
+            <li class="page-item" th:each="i : ${#numbers.sequence(0, questionPage.totalPages - 1)}"
+                th:classappend="${i == questionPage.number ? 'active' : ''}">
                 <a class="page-link"
                    th:href="@{/learn/questions(page=${i}, size=${questionPage.size})}"
                    th:text="${i + 1}">Page number</a>
@@ -72,7 +78,7 @@
     </div>
 
     <!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </div>
 </body>
 </html>

@@ -69,9 +69,11 @@ public class QuestionController {
 //        return mav;
 //    }
 
+
+    // TODO: here maybe do thing with /n signs to be shown properly
     @GetMapping("/learn/questions")
-    public ModelAndView getQuestions(@RequestParam(value = "page", defaultValue = "0") int page,
-                                     @RequestParam(value = "size", defaultValue = "10") int size) {
+    public ModelAndView learnQuestions(@RequestParam(value = "page", defaultValue = "0") int page,
+                                       @RequestParam(value = "size", defaultValue = "10") int size) {
         Page<QuestionDto> questionPage = questionService.getQuestions(PageRequest.of(page, size));
         ModelAndView mav = new ModelAndView(ViewNames.QUESTIONS_VIEW);
         mav.addObject("questionPage", questionPage);
