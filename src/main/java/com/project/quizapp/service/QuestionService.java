@@ -2,11 +2,14 @@ package com.project.quizapp.service;
 
 import com.project.quizapp.dto.PostQuestionDto;
 import com.project.quizapp.dto.QuestionDto;
+import com.project.quizapp.entity.Question;
 import com.project.quizapp.mapper.QuestionMapper;
 import com.project.quizapp.repository.QuestionRepository;
 import com.project.quizapp.utils.Category;
 import com.project.quizapp.utils.Level;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,5 +44,10 @@ public class QuestionService {
 
     public QuestionDto getQuestionById(Long id) {
         return questionMapper.toDto(questionRepository.getReferenceById(id));
+    }
+
+    public Page<QuestionDto> getQuestions(PageRequest of) {
+            Page<Question> questionPage = questionRepository.findAll(of);
+            return questionPage.map(questionMapper::toDto);
     }
 }

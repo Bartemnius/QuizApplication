@@ -3,10 +3,11 @@ package com.project.quizapp.controller;
 import com.project.quizapp.dto.QuestionDto;
 import com.project.quizapp.mapper.QuestionMapper;
 import com.project.quizapp.service.QuestionService;
-import com.project.quizapp.utils.Category;
 import com.project.quizapp.utils.ViewNames;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,8 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -69,4 +68,13 @@ public class QuestionController {
 //        ModelAndView mav = new ModelAndView("questionsByCategory-view");
 //        return mav;
 //    }
+
+    @GetMapping("/learn/questions")
+    public ModelAndView getQuestions(@RequestParam(value = "page", defaultValue = "0") int page,
+                                     @RequestParam(value = "size", defaultValue = "10") int size) {
+        Page<QuestionDto> questionPage = questionService.getQuestions(PageRequest.of(page, size));
+        ModelAndView mav = new ModelAndView(ViewNames.QUESTIONS_VIEW);
+        mav.addObject("questionPage", questionPage);
+        return mav;
+    }
 }
