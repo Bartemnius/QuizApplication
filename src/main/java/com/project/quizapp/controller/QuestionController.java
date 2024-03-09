@@ -62,6 +62,11 @@ public class QuestionController {
         return "redirect:/question/" + questionId;
     }
 
+    @GetMapping("/about")
+    public ModelAndView contact() {
+        return new ModelAndView(ViewNames.ABOUT_VIEW);
+    }
+
 //    @GetMapping("/category/{category}")
 //    public ModelAndView getQuestionsByCategory(@PathVariable Category category) {
 //        List<QuestionDto> questionsByCategory = questionService.getQuestionsByCategory(category);

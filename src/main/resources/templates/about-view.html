@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Ojuju:wght@200..800&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <!--custom css-->
+    <link href="style.css" rel="stylesheet">
+
+</head>
+
+<body>
+<!-- Custom menu fragment -->
+<div th:replace="fragments/menu :: customMenu">
+</div>
+
+<div class="container mt-5" data-bs-theme="dark">
+    <!-- Logo and title row -->
+    <div class="row mb-5 justify-content-center align-items-center">
+        <div class="col-md-3 text-center">
+            <img src="quiz_api_logo-transformed.webp" alt="Logo" class="img-fluid">
+        </div>
+        <div class="col-md-6 text-center">
+            <h2 class="title">Contact Me</h2>
+        </div>
+    </div>
+
+    <!-- Main text for Contact page -->
+    <div class="main-text">
+        <h4>About Me</h4>
+        <p>I am a passionate junior Java developer dedicated to easing the job search and preparation process for peers in my field. The inspiration for my project came from the challenges faced while gathering comprehensive resources for junior Java developer interview questions. My goal is to create a centralized platform to streamline this process for aspiring developers.</p>
+
+        <h4>Connect with Me</h4>
+        <p>You can connect with me on LinkedIn or check out my projects on GitHub:</p>
+        <ul>
+            <li>LinkedIn: <a href="your-linkedin-link-here" target="_blank">LinkedIn Profile</a></li>
+            <li>GitHub: <a href="your-github-link-here" target="_blank">GitHub Profile</a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="customMenu">
+    <style>
+        .custom-menu {
+            background-color: #0b2a05cf;
+            font-family: 'Oswald', sans-serif;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .custom-menu a {
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .custom-menu a:hover {
+            background-color: #d7e0d5; /*light hover effect*/
+            color: #0e500e;
+        }
+    </style>
+
+    <div class="custom-menu">
+        <a th:href="@{/}">Home page</a>
+        <a th:href="@{/randomQuestion}">Practise</a>
+        <a th:href="@{/learn/questions}">Learn</a>
+        <a th:href="@{/quiz}">Quiz challenge</a>
+        <a th:href="@{/about}">About</a>
+    </div>
+</div>
+</html>

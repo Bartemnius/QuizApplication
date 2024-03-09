@@ -1,0 +1,41 @@
+img.logo {
+    width: 40%;
+    height: auto;
+}
+
+.title {
+    font-size: 40px;
+    font-weight: bold;
+    color: #212529;
+    font-family: "Fira Code", monospace;
+}
+
+body {
+    background: linear-gradient(to right, white, #0b2a05cf);
+    font-family: 'Oswald', sans-serif;
+}
+
+.main-text, .card {
+    background-color: #d7e0d5;
+    border-left: 5px solid #0e500e;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: justify;
+}
+
+a.card, .btn-link, .btn-link:hover, .btn-link:focus, .btn-link:active {
+    color: #212529;
+    text-decoration: none;
+    background-color: #d7e0d5;
+}
+
+.card:hover, .btn:hover {
+    transform: scale(1.03);
+    transition: all 0.3s ease-in-out;
+}
+
+.modal-body {
+    text-align: justify;
+}

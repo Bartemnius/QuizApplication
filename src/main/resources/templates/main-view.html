@@ -14,52 +14,15 @@
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Ojuju:wght@200..800&family=Oswald:wght@200..700&display=swap"
           rel="stylesheet">
-    <style>
-        img.logo {
-        width: 40%;
-        height: auto;
-        }
-
-        .title {
-        font-size: 40px;
-        font-weight: bold;
-        color: #212529;
-        font-family: "Fira Code", monospace;
-        }
-
-        /* .img-fluid {*/
-        /* max-height: 100px;*/
-        /* }*/
-
-        body {
-        background: linear-gradient(to right, white, #0b2a05cf);
-        /* font-family: 'Playfair Display', sans-serif;*/
-        font-family: 'Oswald', sans-serif;
-        }
-
-        a.card {
-        color: white;
-        text-decoration: none;
-        }
-
-        .main-text {
-        background-color: #d7e0d5;
-        border-left: 5px solid #0e500e;
-        padding: 20px;
-        margin: 20px 0;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-        text-align: justify;
-        }
-
-        .card:hover {
-        transform: scale(1.03);
-        transition: all 0.3s ease-in-out;
-        }
-    </style>
+    <!--custom css-->
+    <link href="style.css" rel="stylesheet">
 </head>
 
 <body>
+<!--Custom menu fragment-->
+<div th:replace="fragments/menu :: customMenu"></div>
+
+<!-- Main Container -->
 <div class="container mt-5" data-bs-theme="dark">
     <!-- Logo and title row -->
     <div class="row mb-5 justify-content-center align-items-center">
@@ -106,7 +69,7 @@
         <div class="col-md-4">
             <a th:href="@{/learn/questions}" class="card h-100 mt-2">
                 <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                    <h5 class="card-title">Learn interview questions!</h5>
+                    <h5 class="card-title">Learn interview questions</h5>
                     <h6>Press me to go through questions one by one and read explanation for each
                         one of them!</h6>
                 </div>
@@ -114,11 +77,14 @@
         </div>
 
         <!-- Tile 3 -->
+        <!-- TODO : here will be implemented quiz card, so something like 10/20 random questions
+        with timer on them -->
         <div class="col-md-4">
             <a href="" class="card h-100 mt-2">
                 <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                    <h5 class="card-title">Tile 3</h5>
-                    <h6>Description for tile 3</h6>
+                    <h5 class="card-title">Quiz challenge</h5>
+                    <h6>Challenge yourself with 20 random question 1 minute for each of them.
+                        The score will be display at the end of the test.</h6>
                 </div>
             </a>
         </div>
