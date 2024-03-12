@@ -67,14 +67,6 @@ public class QuestionController {
         return new ModelAndView(ViewNames.ABOUT_VIEW);
     }
 
-//    @GetMapping("/category/{category}")
-//    public ModelAndView getQuestionsByCategory(@PathVariable Category category) {
-//        List<QuestionDto> questionsByCategory = questionService.getQuestionsByCategory(category);
-//        ModelAndView mav = new ModelAndView("questionsByCategory-view");
-//        return mav;
-//    }
-
-
     // TODO: here maybe do thing with /n signs to be shown properly
     @GetMapping("/learn/questions")
     public ModelAndView learnQuestions(@RequestParam(value = "page", defaultValue = "0") int page,

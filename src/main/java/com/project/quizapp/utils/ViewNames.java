@@ -5,4 +5,5 @@ public class ViewNames {
     public static final String QUESTION_VIEW = "random-question-view";
     public static final String QUESTIONS_VIEW = "questions-view";
     public static final String ABOUT_VIEW = "about-view";
+    public static final String QUIZ_VIEW = "quiz-view";
 }
