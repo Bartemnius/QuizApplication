@@ -7,4 +7,5 @@ public class ViewNames {
     public static final String ABOUT_VIEW = "about-view";
     public static final String QUIZ_VIEW = "quiz-view";
     public static final String QUIZ_RESULT_VIEW = "result-view";
+    public static final String QUIZ_CONFIRMATION_VIEW = "quiz-confirm-start-view";
 }

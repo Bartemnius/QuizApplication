@@ -18,6 +18,12 @@
 <!--Custom menu fragment-->
 <div th:replace="~{fragments/menu :: customMenu}"></div>
 
+<div th:if="${quizEnded}" class="alert alert-info">
+    Quiz has ended! You can not change your answers. To generate new quiz please click on quiz
+    button that is displayed in menu bar.
+</div>
+
+
 <!-- Main Container -->
 <div class="container mt-5" data-bs-theme="dark">
 
@@ -35,25 +41,29 @@
 
                     <div>
                         <input type="radio" th:id="'ansA_' + ${question.id}"
-                               th:name="'answer_' + ${question.id}" th:value="${question.ansA}">
+                               th:name="'answer_' + ${question.id}" th:value="${question.ansA}"
+                               th:disabled="${quizEnded}">
                         <label th:for="'ansA_' + ${question.id}" th:text="${question.ansA}">Answer
                             A</label>
                     </div>
                     <div>
                         <input type="radio" th:id="'ansB_' + ${question.id}"
-                               th:name="'answer_' + ${question.id}" th:value="${question.ansB}">
+                               th:name="'answer_' + ${question.id}" th:value="${question.ansB}"
+                               th:disabled="${quizEnded}">
                         <label th:for="'ansB_' + ${question.id}" th:text="${question.ansB}">Answer
                             B</label>
                     </div>
                     <div>
                         <input type="radio" th:id="'ansC_' + ${question.id}"
-                               th:name="'answer_' + ${question.id}" th:value="${question.ansC}">
+                               th:name="'answer_' + ${question.id}" th:value="${question.ansC}"
+                               th:disabled="${quizEnded}">
                         <label th:for="'ansC_' + ${question.id}" th:text="${question.ansC}">Answer
                             C</label>
                     </div>
                     <div>
                         <input type="radio" th:id="'ansD_' + ${question.id}"
-                               th:name="'answer_' + ${question.id}" th:value="${question.ansD}">
+                               th:name="'answer_' + ${question.id}" th:value="${question.ansD}"
+                               th:disabled="${quizEnded}">
                         <label th:for="'ansD_' + ${question.id}" th:text="${question.ansD}">Answer
                             D</label>
                     </div>
@@ -63,7 +73,8 @@
 
         <!-- Submit button for the entire form -->
         <div class="submit-button">
-            <button type="submit" class="btn btn-primary">Submit All Answers</button>
+            <button type="submit" class="btn btn-primary"
+                    th:disabled="${quizEnded}">Submit All Answers</button>
         </div>
     </form>
 
