@@ -22,7 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class QuestionController {
 
     private final QuestionService questionService;
-    private final ModelAndView questionView = new ModelAndView(ViewNames.QUESTION_VIEW);
+    private final ModelAndView questionView = new ModelAndView(ViewNames.RANDOM_QUESTION_VIEW);
     private final QuestionMapper questionMapper = QuestionMapper.getInstance();
 
 

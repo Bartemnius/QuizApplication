@@ -27,38 +27,49 @@
 <div th:replace="fragments/menu :: customMenu"></div>
 
 <!-- Main Container -->
-<div class="container mt-5"  data-bs-theme="dark">
+<div class="container mt-5" data-bs-theme="dark">
 
-    <!-- Loop through each question -->
-    <div th:each="question : ${questionList}">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title" align="center" th:text="${question.question}">Question Text</h5>
-            </div>
-            <div class="card-body">
-                <input type="hidden" th:name="'questionId_' + ${question.id}" th:value="${question.id}">
+    <form th:action="@{/quiz/submitQuiz}" method="post">
+        <!-- Loop through each question -->
+        <div th:each="question : ${questionList}">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title" align="center" th:text="${question.question}">Question
+                        Text</h5>
+                </div>
+                <div class="card-body">
+                    <input type="hidden" th:name="'questionId_' + ${question.id}"
+                           th:value="${question.id}">
 
-                <div>
-                    <input type="radio" th:id="'ansA_' + ${question.id}" th:name="'answer_' + ${question.id}" th:value="${question.ansA}">
-                    <label th:for="'ansA_' + ${question.id}" th:text="${question.ansA}">Answer A</label>
-                </div>
-                <div>
-                    <input type="radio" th:id="'ansB_' + ${question.id}" th:name="'answer_' + ${question.id}" th:value="${question.ansB}">
-                    <label th:for="'ansB_' + ${question.id}" th:text="${question.ansB}">Answer B</label>
-                </div>
-                <div>
-                    <input type="radio" th:id="'ansC_' + ${question.id}" th:name="'answer_' + ${question.id}" th:value="${question.ansC}">
-                    <label th:for="'ansC_' + ${question.id}" th:text="${question.ansC}">Answer C</label>
-                </div>
-                <div>
-                    <input type="radio" th:id="'ansD_' + ${question.id}" th:name="'answer_' + ${question.id}" th:value="${question.ansD}">
-                    <label th:for="'ansD_' + ${question.id}" th:text="${question.ansD}">Answer D</label>
+                    <div>
+                        <input type="radio" th:id="'ansA_' + ${question.id}"
+                               th:name="'answer_' + ${question.id}" th:value="${question.ansA}">
+                        <label th:for="'ansA_' + ${question.id}" th:text="${question.ansA}">Answer
+                            A</label>
+                    </div>
+                    <div>
+                        <input type="radio" th:id="'ansB_' + ${question.id}"
+                               th:name="'answer_' + ${question.id}" th:value="${question.ansB}">
+                        <label th:for="'ansB_' + ${question.id}" th:text="${question.ansB}">Answer
+                            B</label>
+                    </div>
+                    <div>
+                        <input type="radio" th:id="'ansC_' + ${question.id}"
+                               th:name="'answer_' + ${question.id}" th:value="${question.ansC}">
+                        <label th:for="'ansC_' + ${question.id}" th:text="${question.ansC}">Answer
+                            C</label>
+                    </div>
+                    <div>
+                        <input type="radio" th:id="'ansD_' + ${question.id}"
+                               th:name="'answer_' + ${question.id}" th:value="${question.ansD}">
+                        <label th:for="'ansD_' + ${question.id}" th:text="${question.ansD}">Answer
+                            D</label>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Submit button for the entire form -->
+        <!-- Submit button for the entire form -->
         <div class="submit-button">
             <button type="submit" class="btn btn-primary">Submit All Answers</button>
         </div>

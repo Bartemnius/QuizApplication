@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -22,5 +23,24 @@ public class QuizService {
         ids = ids.subList(0, numOfQuestions);
         List<Question> randomQuestions = questionRepository.findAllById(ids);
         return randomQuestions;
+    }
+
+    public int calculateScore(Map<String, String> allParams) {
+        int score = 0;
+        System.out.println(allParams);
+        for (Map.Entry<String, String> entry : allParams.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+
+            if (key.startsWith("answer_")) {
+                Long questionId = Long.parseLong(key.split("_")[1]);
+                String userAnswer = value;
+                Question question = questionRepository.getReferenceById(questionId);
+                if (question != null && question.isAnswerCorrect(userAnswer)) {
+                    score++;
+                }
+            }
+        }
+        return score;
     }
 }
