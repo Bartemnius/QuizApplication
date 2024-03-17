@@ -67,11 +67,12 @@ public class QuestionController {
         return new ModelAndView(ViewNames.ABOUT_VIEW);
     }
 
-    // TODO: here maybe do thing with /n signs to be shown properly
     @GetMapping("/learn/questions")
     public ModelAndView learnQuestions(@RequestParam(value = "page", defaultValue = "0") int page,
                                        @RequestParam(value = "size", defaultValue = "10") int size) {
         Page<QuestionDto> questionPage = questionService.getQuestions(PageRequest.of(page, size));
+        //this enables the newline sign to be proper handled in view
+        questionPage.forEach(questionDto -> QuestionDto.withModifiedExplanation(questionDto));
         ModelAndView mav = new ModelAndView(ViewNames.QUESTIONS_VIEW);
         mav.addObject("questionPage", questionPage);
         return mav;
