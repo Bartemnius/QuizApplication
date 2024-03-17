@@ -6,19 +6,25 @@
     <title>Questions</title>
     <!-- Thymeleaf fragment for fonts and styles -->
     <th:block th:replace="~{fragments/head :: googleFontsAndBootstrapStyles}"></th:block>
+
+    <style>
+        body {
+            background: linear-gradient(to right, white, #0b2a05cf);
+            font-family: 'Oswald', sans-serif;
+        }
+        /* so it does not colide with menu*/
+        .alert, .alert-info {
+            margin-top: 70px !important ;
+        }
+    </style>
 </head>
 
-<style>
-    body {
-        background: linear-gradient(to right, white, #0b2a05cf);
-        font-family: 'Oswald', sans-serif;
-    }
-</style>
+
 <body>
 <!--Custom menu fragment-->
 <div th:replace="~{fragments/menu :: customMenu}"></div>
 
-<div th:if="${quizEnded}" class="alert alert-info">
+<div th:if="${quizEnded}" class="alert alert-info" style="margin-top: 70px;">
     Quiz has ended! You can not change your answers. To generate new quiz please click on quiz
     button that is displayed in menu bar.
 </div>
