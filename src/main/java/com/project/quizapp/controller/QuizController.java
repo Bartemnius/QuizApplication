@@ -4,6 +4,7 @@ import com.project.quizapp.mapper.QuestionMapper;
 import com.project.quizapp.model.Quiz;
 import com.project.quizapp.service.QuizService;
 import com.project.quizapp.utils.ViewNames;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,29 +21,27 @@ import java.util.Map;
 @RequestMapping("/quiz")
 public class QuizController {
     private final QuizService quizService;
-    private Quiz quiz;
     private final QuestionMapper questionMapper = QuestionMapper.getInstance();
 
     @GetMapping
-    public ModelAndView getQuiz(HttpSession session) {
+    public ModelAndView getQuiz(HttpSession session, HttpServletResponse response) {
+        //on each back reload page so teh user can not change answer after submitting
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Pragma", "no-cache");
+        response.setDateHeader("Expires", 0);
+
+        Quiz quiz = new Quiz(quizService.getRandomQuestionsForQuiz(20), 0, 20);
+        ModelAndView mav = new ModelAndView(ViewNames.QUIZ_VIEW);
+        mav.addObject("questionList", questionMapper.toListDto(quiz.getQuestions()));
+
         //check if quiz did not end
         boolean quizEnded = (boolean) session.getAttribute("quizEnded");
-//        if (quizEnded) {
-//            return new ModelAndView(ViewNames.QUIZ_RESULT_VIEW);
-//        }
-        //set param quizStarted so user can not go back to it after ending quiz
-        if (session.getAttribute("quizStarted") == null) {
-            session.setAttribute("quizStarted", true);
+        //redirect to review view
+        if (quizEnded) {
+            session.setAttribute("quiz", quiz);
+            return new ModelAndView("redirect:/quiz/review");
         }
 
-        ModelAndView mav = new ModelAndView(ViewNames.QUIZ_VIEW);
-        quiz = new Quiz(quizService.getRandomQuestionsForQuiz(20), 0, 20);
-        mav.addObject("questionList", questionMapper.toListDto(quiz.getQuestions()));
-        mav.addObject("quizEnded", quizEnded);
-        //do not cache the answer
-        mav.addObject("Cache-Control", "no-cache, no-store, must-revalidate");
-        mav.addObject("Pragma", "no-cache");
-        mav.addObject("Expires", "0");
         return mav;
     }
 
@@ -55,11 +54,20 @@ public class QuizController {
 
     @PostMapping("/submitQuiz")
     public ModelAndView submitQuiz(@RequestParam Map<String, String> allParams, HttpSession session) {
-        session.removeAttribute("quizStarted");
         session.setAttribute("quizEnded", true);
         int score = quizService.calculateScore(allParams);
         ModelAndView mav = new ModelAndView(ViewNames.QUIZ_RESULT_VIEW);
         mav.addObject("score", score);
         return mav;
     }
+
+    @GetMapping("/review")
+    public ModelAndView reviewQuiz(HttpSession session) {
+        Quiz quiz = (Quiz) session.getAttribute("quiz");
+        ModelAndView mav = new ModelAndView(ViewNames.QUIZ_VIEW);
+        mav.addObject("questionList", questionMapper.toListDto(quiz.getQuestions()));
+        mav.addObject("quizEnded", true);
+        return mav;
+    }
+
 }
