@@ -7,6 +7,8 @@ import com.project.quizapp.utils.Category;
 import com.project.quizapp.utils.Level;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,16 +22,17 @@ public class QuestionRestController {
 
     private final QuestionService questionService;
 
-    // TODO: maybe if there is like 1000000 question in DB there should be paging
-    //  but is to be done much later
-    @GetMapping("/allQuestions")
-    public ResponseEntity<List<QuestionDto>> getAllQuestion() {
-        return new ResponseEntity<>(questionService.getAllQuestions(), HttpStatus.OK);
+    @GetMapping
+    public ResponseEntity<Page<QuestionDto>> getAllQuestion(@RequestParam(defaultValue = "0") int page,
+                                                            @RequestParam(defaultValue = "10") int size) {
+        Page<QuestionDto> questions = questionService.getQuestions(PageRequest.of(page, size));
+        return new ResponseEntity<>(questions, HttpStatus.OK);
     }
 
-    @PostMapping("/addQuestion")
-    public ResponseEntity<Long> addQuestion(@Valid @RequestBody PostQuestionDto postQuestionDto) {
-        return new ResponseEntity<>(questionService.addQuestion(postQuestionDto), HttpStatus.CREATED);
+    @PostMapping
+    public ResponseEntity<List<Long>> addQuestions(@Valid @RequestBody List<PostQuestionDto> postQuestionDtos) {
+        List<Long> ids = questionService.addQuestions(postQuestionDtos);
+        return new ResponseEntity<>(ids, HttpStatus.CREATED);
     }
 
     @GetMapping("/level/{questionLevel}")
@@ -42,7 +45,7 @@ public class QuestionRestController {
         return new ResponseEntity<>(questionService.getQuestionsByCategory(category), HttpStatus.OK);
     }
 
-    @GetMapping("/randomQuestion")
+    @GetMapping("/random-question")
     public ResponseEntity<QuestionDto> getRandomQuestion() {
         return new ResponseEntity<>(questionService.getRandomQuestion(), HttpStatus.OK);
     }

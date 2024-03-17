@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -49,5 +50,15 @@ public class QuestionService {
     public Page<QuestionDto> getQuestions(PageRequest of) {
             Page<Question> questionPage = questionRepository.findAll(of);
             return questionPage.map(questionMapper::toDto);
+    }
+
+    public List<Long> addQuestions(List<PostQuestionDto> postQuestionDtos) {
+        List<Long> ids = new ArrayList<>();
+        for (PostQuestionDto dto : postQuestionDtos) {
+            // Zakładając, że addQuestion zwraca ID nowo dodanego pytania
+            Long id = addQuestion(dto);
+            ids.add(id);
+        }
+        return ids;
     }
 }
