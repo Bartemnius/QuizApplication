@@ -10,9 +10,6 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface QuestionMapper {
-    static QuestionMapper getInstance() {
-        return Mappers.getMapper(QuestionMapper.class);
-    }
 
     QuestionDto toDto(Question questionEntity); //here name has to be with Entity cos otherwise mapstruct is not working properly
     Question toEntity(QuestionDto questionDto);

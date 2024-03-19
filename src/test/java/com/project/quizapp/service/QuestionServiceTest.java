@@ -13,6 +13,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.verify;
@@ -24,7 +25,8 @@ class QuestionServiceTest {
     private QuestionRepository questionRepository;
     @InjectMocks
     private QuestionService questionService;
-    private final QuestionMapper questionMapper = QuestionMapper.getInstance();
+    @Autowired
+    private QuestionMapper questionMapper;
 
 
     @Test

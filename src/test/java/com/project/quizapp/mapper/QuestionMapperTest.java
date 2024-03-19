@@ -5,6 +5,7 @@ import com.project.quizapp.entity.Question;
 import com.project.quizapp.utils.Category;
 import com.project.quizapp.utils.Level;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class QuestionMapperTest {
 
-    private QuestionMapper questionMapper = QuestionMapper.getInstance();
+    @Autowired
+    private QuestionMapper questionMapper;
 
     @Test
     public void questionToQuestionDtoConversion() {

@@ -21,7 +21,7 @@ import java.util.Map;
 @RequestMapping("/quiz")
 public class QuizController {
     private final QuizService quizService;
-    private final QuestionMapper questionMapper = QuestionMapper.getInstance();
+    private final QuestionMapper questionMapper;
 
     @GetMapping
     public ModelAndView getQuiz(HttpSession session, HttpServletResponse response) {

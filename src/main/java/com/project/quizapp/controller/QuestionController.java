@@ -23,7 +23,7 @@ public class QuestionController {
 
     private final QuestionService questionService;
     private final ModelAndView questionView = new ModelAndView(ViewNames.RANDOM_QUESTION_VIEW);
-    private final QuestionMapper questionMapper = QuestionMapper.getInstance();
+    private final QuestionMapper questionMapper;
 
 
     @GetMapping("/")
@@ -72,7 +72,7 @@ public class QuestionController {
                                        @RequestParam(value = "size", defaultValue = "10") int size) {
         Page<QuestionDto> questionPage = questionService.getQuestions(PageRequest.of(page, size));
         //this enables the newline sign to be proper handled in view
-        questionPage.forEach(questionDto -> QuestionDto.withModifiedExplanation(questionDto));
+        questionPage.forEach(QuestionDto::withModifiedExplanation);
         ModelAndView mav = new ModelAndView(ViewNames.QUESTIONS_VIEW);
         mav.addObject("questionPage", questionPage);
         return mav;

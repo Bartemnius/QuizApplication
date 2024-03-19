@@ -20,7 +20,7 @@ import java.util.List;
 public class QuestionService {
     private final QuestionRepository questionRepository;
 
-    private final QuestionMapper questionMapper = QuestionMapper.getInstance();
+    private final QuestionMapper questionMapper;
 
 
     public List<QuestionDto> getAllQuestions() {

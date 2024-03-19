@@ -23,7 +23,7 @@ public class QuestionRestController {
     private final QuestionService questionService;
 
     @GetMapping
-    public ResponseEntity<Page<QuestionDto>> getAllQuestion(@RequestParam(defaultValue = "0") int page,
+    public ResponseEntity<Page<QuestionDto>> getAllQuestions(@RequestParam(defaultValue = "0") int page,
                                                             @RequestParam(defaultValue = "10") int size) {
         Page<QuestionDto> questions = questionService.getQuestions(PageRequest.of(page, size));
         return new ResponseEntity<>(questions, HttpStatus.OK);
@@ -41,7 +41,7 @@ public class QuestionRestController {
     }
 
     @GetMapping("/category/{category}")
-    public ResponseEntity<List<QuestionDto>> getQuestionsByLevel(@PathVariable Category category) {
+    public ResponseEntity<List<QuestionDto>> getQuestionsByCategory(@PathVariable Category category) {
         return new ResponseEntity<>(questionService.getQuestionsByCategory(category), HttpStatus.OK);
     }
 
