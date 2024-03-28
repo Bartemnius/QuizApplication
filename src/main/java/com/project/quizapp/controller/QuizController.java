@@ -7,6 +7,7 @@ import com.project.quizapp.utils.ViewNames;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 @RequestMapping("/quiz")
 public class QuizController {
     private final QuizService quizService;
@@ -25,6 +27,7 @@ public class QuizController {
 
     @GetMapping
     public ModelAndView getQuiz(HttpSession session, HttpServletResponse response) {
+        log.info("Fetching quiz");
         //on each back reload page so teh user can not change answer after submitting
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         response.setHeader("Pragma", "no-cache");
@@ -38,6 +41,7 @@ public class QuizController {
         boolean quizEnded = (boolean) session.getAttribute("quizEnded");
         //redirect to review view
         if (quizEnded) {
+            log.info("Can not fetch quiz, quiz already ended!");
             session.setAttribute("quiz", quiz);
             return new ModelAndView("redirect:/quiz/review");
         }
@@ -54,6 +58,7 @@ public class QuizController {
 
     @PostMapping("/submitQuiz")
     public ModelAndView submitQuiz(@RequestParam Map<String, String> allParams, HttpSession session) {
+        log.info("Quiz submitted");
         session.setAttribute("quizEnded", true);
         int score = quizService.calculateScore(allParams);
         ModelAndView mav = new ModelAndView(ViewNames.QUIZ_RESULT_VIEW);

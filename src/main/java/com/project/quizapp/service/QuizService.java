@@ -3,6 +3,7 @@ package com.project.quizapp.service;
 import com.project.quizapp.entity.Question;
 import com.project.quizapp.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -11,6 +12,7 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class QuizService {
 
     private final QuestionRepository questionRepository;
@@ -27,7 +29,6 @@ public class QuizService {
 
     public int calculateScore(Map<String, String> allParams) {
         int score = 0;
-        System.out.println(allParams);
         for (Map.Entry<String, String> entry : allParams.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
@@ -41,6 +42,7 @@ public class QuizService {
                 }
             }
         }
+        log.info("User score was {}", score);
         return score;
     }
 }

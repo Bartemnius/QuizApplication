@@ -33,7 +33,9 @@ public class QuestionController {
 
     @GetMapping("/randomQuestion")
     public ModelAndView randomQuestion() {
+        log.info("Fetching random question");
         QuestionDto questionDto = questionService.getRandomQuestion();
+        log.info("Random question retrieved {} ", questionDto.id());
         QuestionDto modifiedQuestionDto = QuestionDto.withModifiedExplanation(questionDto);
         questionView.addObject("question", modifiedQuestionDto);
         return questionView;
@@ -41,7 +43,11 @@ public class QuestionController {
 
     @GetMapping("/question/{questionId}")
     public ModelAndView question(@PathVariable Long questionId) {
+        log.info("Fetching question with id:  {}", questionId);
         QuestionDto questionDto = questionService.getQuestionById(questionId);
+        if(questionDto == null) {
+            log.warn("There is no question with id: {}", questionId);
+        }
         //this enables the newline sign to be proper handled in view
         QuestionDto modifiedQuestionDto = QuestionDto.withModifiedExplanation(questionDto);
         questionView.addObject("question", modifiedQuestionDto);
@@ -50,13 +56,13 @@ public class QuestionController {
 
     @PostMapping("/answer")
     public String answer(@RequestParam Long questionId, @RequestParam String ans, RedirectAttributes redirectAttributes) {
+        log.info("Receiving answer for question ID: {}", questionId);
         QuestionDto questionDto = questionService.getQuestionById(questionId);
-
         if (questionMapper.toEntity(questionDto).isAnswerCorrect(ans)) {
-            log.info("Correct!");
+            log.info("Correct answer for question with id: {}", questionId);
             redirectAttributes.addFlashAttribute("result", "success");
         } else {
-            log.info("Not this time :(");
+            log.info("Incorrect answer for question with id: {}", questionId);
             redirectAttributes.addFlashAttribute("result", "failure");
         }
         return "redirect:/question/" + questionId;
@@ -70,6 +76,7 @@ public class QuestionController {
     @GetMapping("/learn/questions")
     public ModelAndView learnQuestions(@RequestParam(value = "page", defaultValue = "0") int page,
                                        @RequestParam(value = "size", defaultValue = "10") int size) {
+        log.info("Fetching questions for page: {} with size: {}", page, size);
         Page<QuestionDto> questionPage = questionService.getQuestions(PageRequest.of(page, size));
         //this enables the newline sign to be proper handled in view
         questionPage.forEach(QuestionDto::withModifiedExplanation);

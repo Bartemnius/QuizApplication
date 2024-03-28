@@ -55,7 +55,6 @@ public class QuestionService {
     public List<Long> addQuestions(List<PostQuestionDto> postQuestionDtos) {
         List<Long> ids = new ArrayList<>();
         for (PostQuestionDto dto : postQuestionDtos) {
-            // Zakładając, że addQuestion zwraca ID nowo dodanego pytania
             Long id = addQuestion(dto);
             ids.add(id);
         }
