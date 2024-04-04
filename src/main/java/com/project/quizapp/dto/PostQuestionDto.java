@@ -14,5 +14,5 @@ public record PostQuestionDto(
         @NotBlank(message = "Good answer can not be empty!") String goodAnswer,
         @NotNull(message = "Level can not be empty!") Level level,
         @NotNull(message = "Category can not be empty!") Category category,
-        String explanation) {
+        @NotNull(message = "Please provide explanation to the question!") String explanation) {
 }

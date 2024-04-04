@@ -26,7 +26,7 @@ public class QuestionRestController {
 
     @GetMapping
     public ResponseEntity<Page<QuestionDto>> getAllQuestions(@RequestParam(defaultValue = "0") int page,
-                                                            @RequestParam(defaultValue = "10") int size) {
+                                                             @RequestParam(defaultValue = "10") int size) {
         log.info("Fetching question of page {} with page size {}", page, size);
         Page<QuestionDto> questions = questionService.getQuestions(PageRequest.of(page, size));
         return new ResponseEntity<>(questions, HttpStatus.OK);
@@ -55,5 +55,17 @@ public class QuestionRestController {
     public ResponseEntity<QuestionDto> getRandomQuestion() {
         log.info("Fetching random question");
         return new ResponseEntity<>(questionService.getRandomQuestion(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<QuestionDto> getQuestionById(@PathVariable Long id) {
+        return new ResponseEntity<>(questionService.getQuestionById(id), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteQuestion(@PathVariable Long id) {
+        log.info("Deleting question with id: {}", id);
+        questionService.deleteQuestion(id);
+        return ResponseEntity.noContent().build();
     }
 }

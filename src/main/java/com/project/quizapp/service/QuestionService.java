@@ -3,6 +3,7 @@ package com.project.quizapp.service;
 import com.project.quizapp.dto.PostQuestionDto;
 import com.project.quizapp.dto.QuestionDto;
 import com.project.quizapp.entity.Question;
+import com.project.quizapp.exceptions.QuestionListCanNotBeEmptyException;
 import com.project.quizapp.mapper.QuestionMapper;
 import com.project.quizapp.repository.QuestionRepository;
 import com.project.quizapp.utils.Category;
@@ -53,11 +54,18 @@ public class QuestionService {
     }
 
     public List<Long> addQuestions(List<PostQuestionDto> postQuestionDtos) {
-        List<Long> ids = new ArrayList<>();
-        for (PostQuestionDto dto : postQuestionDtos) {
-            Long id = addQuestion(dto);
-            ids.add(id);
+        if(!postQuestionDtos.isEmpty()) {
+            List<Long> ids = new ArrayList<>();
+            for (PostQuestionDto dto : postQuestionDtos) {
+                Long id = addQuestion(dto);
+                ids.add(id);
+            }
+            return ids;
         }
-        return ids;
+        throw new QuestionListCanNotBeEmptyException();
+    }
+
+    public void deleteQuestion(Long id) {
+        questionRepository.deleteById(id);
     }
 }
